@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="munits-poc-suite1.xml" />
+	<munit:test name="receive-processed-order-details-test2" doc:id="1447d9db-f3ca-4017-b2c6-76fb35d8df82" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Set Order Var" doc:id="db713bbc-5f65-4c88-bdb1-1248b11ac5f7" processor="set-variable">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="fd8b0271-d27b-4b17-a004-38f87079ed93" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:variables >
+						<munit-tools:variable key="orderVar" value="#[output application/json --- readUrl('classpath://receiveprocessedorderdetailstest2/mock_variable_5.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="Mock Flow Reference Insert Order Header" doc:id="d6701ff2-d312-469d-84e8-4cc529f0b81e" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="85b6c568-0073-4030-94a6-f75f140e1384" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/java --- readUrl('classpath://receiveprocessedorderdetailstest2/mock_payload4.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					<munit-tools:variables >
+						<munit-tools:variable key="orderVar" value="#[output application/json --- readUrl('classpath://receiveprocessedorderdetailstest2/mock_variable_6.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="Mock Bulk insert" doc:id="4b0c533f-be0c-4404-a638-6758c6846337" processor="db:bulk-insert">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="9fe2efdb-ba23-439e-859b-4948959f4b70" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/java --- readUrl('classpath://receiveprocessedorderdetailstest2/mock_payload5.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					<munit-tools:variables >
+						<munit-tools:variable key="orderVar" value="#[output application/json --- readUrl('classpath://receiveprocessedorderdetailstest2/mock_variable_7.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="Mock Fetch Exchange Rates" doc:id="98045cbe-9344-46f9-8d49-0577a0e356be" processor="http:request">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="2ca0b905-7df5-480d-922b-bcf8d4a593a9" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://receiveprocessedorderdetailstest2/mock_payload6.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://receiveprocessedorderdetailstest2/mock_attributes2.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="orderVar" value="#[output application/json --- readUrl('classpath://receiveprocessedorderdetailstest2/mock_variable_8.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="Mock Publish" doc:id="be7fecf3-680a-44fd-affb-d5a6a02c7e87" processor="anypoint-mq:publish">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="39010066-2bfa-4055-bdea-0be94b60f396" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[readUrl('classpath://receiveprocessedorderdetailstest2/mock_payload7.dwl')]" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://receiveprocessedorderdetailstest2/mock_attributes3.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="orderVar" value="#[output application/json --- readUrl('classpath://receiveprocessedorderdetailstest2/mock_variable_9.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="de25c223-2fce-434e-8a9a-882cb949e979" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://receiveprocessedorderdetailstest2/set-event_payload1.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://receiveprocessedorderdetailstest2/set-event_attributes1.dwl')]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to receive-processed-order-details" doc:id="aa51e398-5b6b-446b-bbb5-55ba9db1a76f" name="receive-processed-order-details"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify Logger" doc:id="eac93d52-1638-47ba-a743-888fd92f2aaa" processor="logger" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="d10f5ca7-1d9e-4b48-814c-eb49e12ea8de" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+
+</mule>

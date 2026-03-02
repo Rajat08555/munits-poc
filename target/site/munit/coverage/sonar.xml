@@ -1,0 +1,28 @@
+<coverage version="1">
+  <file path="src/main/mule/munits-poc.xml">
+    <lineToCover lineNumber="125" covered="true"/>
+    <lineToCover lineNumber="124" covered="true"/>
+    <lineToCover lineNumber="137" covered="true"/>
+    <lineToCover lineNumber="28" covered="true"/>
+    <lineToCover lineNumber="34" covered="true"/>
+    <lineToCover lineNumber="32" covered="true"/>
+    <lineToCover lineNumber="35" covered="true"/>
+    <lineToCover lineNumber="33" covered="true"/>
+    <lineToCover lineNumber="55" covered="false"/>
+    <lineToCover lineNumber="62" covered="false"/>
+    <lineToCover lineNumber="54" covered="false"/>
+    <lineToCover lineNumber="49" covered="false"/>
+    <lineToCover lineNumber="61" covered="false"/>
+    <lineToCover lineNumber="48" covered="false"/>
+    <lineToCover lineNumber="100" covered="true"/>
+    <lineToCover lineNumber="101" covered="true"/>
+    <lineToCover lineNumber="109" covered="true"/>
+    <lineToCover lineNumber="119" covered="true"/>
+    <lineToCover lineNumber="80" covered="true"/>
+    <lineToCover lineNumber="96" covered="true"/>
+    <lineToCover lineNumber="108" covered="true"/>
+    <lineToCover lineNumber="81" covered="true"/>
+    <lineToCover lineNumber="79" covered="true"/>
+    <lineToCover lineNumber="78" covered="true"/>
+  </file>
+</coverage>

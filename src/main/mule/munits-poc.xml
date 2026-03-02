@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+	xmlns:sharepoint="http://www.mulesoft.org/schema/mule/sharepoint"
+	xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:sap="http://www.mulesoft.org/schema/mule/sap" xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:anypoint-mq="http://www.mulesoft.org/schema/mule/anypoint-mq" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/anypoint-mq http://www.mulesoft.org/schema/mule/anypoint-mq/current/mule-anypoint-mq.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/sap http://www.mulesoft.org/schema/mule/sap/current/mule-sap.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/sharepoint http://www.mulesoft.org/schema/mule/sharepoint/current/mule-sharepoint.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="44438f35-9fef-439b-873d-097c33197ccd" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<anypoint-mq:config name="Anypoint_MQ_Config" doc:name="Anypoint MQ Config" doc:id="13f2f747-e98e-4fe8-8cec-6e4a61764792" >
+		<anypoint-mq:connection url="https://mq-us-east-1.anypoint.mulesoft.com/api/v1/organizations/8a188a0e-4d0a-4dad-bad7-b4636f37f57b/environments/f627a844-5314-4315-b12d-f7b3b381fb8f" clientId="9a0ad37b04de46d192aef36d6c68e0c4" clientSecret="959246Ab340A46D6Ba8A0fa3F6E566b5" />
+	</anypoint-mq:config>
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="581f8a1e-97b2-4c7e-8eb3-e412f465ca49" >
+		<db:generic-connection url="jdbc:postgresql://localhost:5432/postgres" driverClassName="org.postgresql.Driver" user="postgres" password="welcome1" />
+	</db:config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="56823a80-71e6-459d-9b4d-7afac46bead0" >
+		<http:request-connection protocol="HTTPS" host="api.currencyfreaks.com" port="443" />
+	</http:request-config>
+	<flow name="get-order-detailsFlow" doc:id="b8b9630e-ec71-42f3-9e9b-babcf45a8ab2" >
+		<http:listener doc:name="Listener" doc:id="8cc68e83-3b78-4ab1-bd0b-c5183df7c7db" config-ref="HTTP_Listener_config" path="/api/order-details" />
+		<logger level="INFO" doc:name="Logger" doc:id="79f35b99-3187-4318-b866-f701425255f0" message="#[payload]" />
+		<try doc:name="Try" doc:id="f8c06ca7-cd12-4930-9ec7-4a2073779d2e" >
+			<choice doc:name="Choice" doc:id="cdc722f3-4904-4d3b-b86d-f9c528bf318b" >
+				<when expression='#[payload.country == "Singapore" or payload.country == "China"]' >
+					<set-variable value="#[payload.country]" doc:name="Set Variable" doc:id="78f278f6-14c3-4350-81f5-e1ad1697667e" variableName="countryVar" />
+					<logger level="INFO" doc:name="Logger" doc:id="07bca483-d9d5-4d65-91fd-c9219b816004" message='#["Home Country Order: " ++ payload.order_id]' />
+					<anypoint-mq:publish doc:name="Publish" doc:id="01ceb332-6119-4553-91d7-0fe787be620f" config-ref="Anypoint_MQ_Config" destination="order"/>
+					<ee:transform doc:name="Transform Message" doc:id="6903bce5-e426-4273-ac1a-6f82a4faf2ee">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"message": "Order processed successfully for: " ++ vars.countryVar
+}
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+				</when>
+				<otherwise >
+					<logger level="INFO" doc:name="Logger" doc:id="4309b32a-38d8-491d-8a76-3d040f4d7603" message='#["Not a Home Country Order: " ++ payload.order_id]' />
+					<raise-error doc:name="Raise error" doc:id="923ea1ce-2caf-4fb7-a510-a8e14805e934" type="CUSERR:INVALID_COUNTRY" description="Invalid Country mentioned for the order" />
+				</otherwise>
+			</choice>
+			<error-handler >
+				<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="3bbd8ac1-71d5-4403-8c34-e71a5dbbbaf7" >
+					<logger level="INFO" doc:name="Logger" doc:id="540327a0-1dd3-4fdf-bfdb-1c54527f976d" message="#[error.detailedDescription]" />
+					<raise-error doc:name="Raise error" doc:id="b9b700fe-fe6b-41b1-b1d5-2c24d5c56a82" type="CUSERR:INVALID_REQUEST" description="Request Came with Invalid Details" />
+				</on-error-continue>
+			</error-handler>
+		</try>
+		<error-handler >
+			<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="44c4264c-8f76-4d73-ac94-e8f39cf9abb6" >
+				<logger level="INFO" doc:name="Logger" doc:id="962c1855-3348-446c-b93a-7d7fa18247bf" message="#[error.detailedDescription]" />
+				<ee:transform doc:name="Transform Message" doc:id="8e1256c3-b45b-4efb-a8d1-9606287b095b" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"errorMessage": "Invalid Country mentioned for the Order"
+}
+]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+			</on-error-continue>
+		</error-handler>
+	</flow>
+	<flow name="receive-processed-order-details" doc:id="3763ac99-420f-4939-8f0b-704991c06dd6" >
+		<anypoint-mq:subscriber doc:name="Subscriber" doc:id="8eb1d8b1-ec6a-44a0-b4d6-27c96e581121" config-ref="Anypoint_MQ_Config" destination="order"/>
+		<logger level="INFO" doc:name="Logger" doc:id="d10f5ca7-1d9e-4b48-814c-eb49e12ea8de" message="#[payload]"/>
+		<set-variable value="#[payload]" doc:name="Set Order Var" doc:id="fd8b0271-d27b-4b17-a004-38f87079ed93" variableName="orderVar"/>
+		<flow-ref doc:name="Flow Reference Insert Order Header" doc:id="85b6c568-0073-4030-94a6-f75f140e1384" name="insert-order-header"/>
+		<ee:transform doc:name="Transform Message" doc:id="a17bbaba-8fad-4efc-ab5c-9c50d6b6ea71" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+vars.orderVar.lines map {
+	order_line_id : $.order_line_id,
+	line_number : $.line_number,
+	item_id : $.item_id,
+	ordered_qty : $.ordered_qty,
+	line_amount : $.line_amount,
+	status : $.status
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<db:bulk-insert doc:name="Bulk insert" doc:id="9fe2efdb-ba23-439e-859b-4948959f4b70" config-ref="Database_Config">
+			<db:sql ><![CDATA[insert into ORD_LIN (order_line_id, line_number, item_id, ordered_qty, line_amount, status) 
+values (:order_line_id, :line_number, :item_id, :ordered_qty, :line_amount, :status)]]></db:sql>
+		</db:bulk-insert>
+		<logger level="INFO" doc:name="Logger" doc:id="22b3784a-244b-46a1-8217-52098e8d6b41" message="#[%dw 2.0&#10;output application/json&#10;---&#10;payload]" />
+		<http:request method="GET" doc:name="Fetch Exchange Rates" doc:id="2ca0b905-7df5-480d-922b-bcf8d4a593a9" config-ref="HTTP_Request_configuration" path="/latest">
+			<http:query-params><![CDATA[#[output application/java
+---
+{
+	"apikey" : "ec8d5ff70b634ec0be0089da3e857e7d"
+}]]]></http:query-params>
+		</http:request>
+		<logger level="INFO" doc:name="Log Exchange Rates" doc:id="0a77cc2f-3461-4626-87d5-32cc1ea5fdbe" message="#[payload]"/>
+		<anypoint-mq:publish doc:name="Publish" doc:id="39010066-2bfa-4055-bdea-0be94b60f396" config-ref="Anypoint_MQ_Config" destination="order-response">
+			<anypoint-mq:body ><![CDATA[#[%dw 2.0
+output application/json
+---
+{
+	"message": "Order Number: "  ++ vars.orderVar.order_id ++ "successfully processed"
+}]]]></anypoint-mq:body>
+		</anypoint-mq:publish>
+		<error-handler >
+			<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="48c2b67f-5c39-4297-a407-4f054b7f84d7" >
+				<logger level="INFO" doc:name="Logger" doc:id="a1c755ad-c88f-4743-b5e9-1c429a456ff4" message="Error during processing of the order payload"/>
+			</on-error-continue>
+		</error-handler>
+	</flow>
+	<flow name="insert-order-header" doc:id="b625dfdf-0479-4e98-ba39-005f8ea4414c" >
+		<logger level="INFO" doc:name="Logger" doc:id="be020ef2-fdcd-4dbe-8902-6389c1bfe2b9" message="#[payload]" />
+		<db:insert doc:name="Insert" doc:id="2e52a6b5-16f7-4185-9e26-deb5955e1eee" config-ref="Database_Config">
+			<db:sql ><![CDATA[insert into ORD_HDR (order_id, total_invoice_amount, customer_id, status, salesrep_id, country) 
+values (:order_id, :total_invoice_amount, :customer_id, :status, :salesrep_id, :country)]]></db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	'order_id' : payload.order_id,
+	'total_invoice_amount' : payload.total_invoice_amount,
+	'customer_id' : payload.customer_id,
+	'status' : payload.status,
+	'salesrep_id' : payload.salesrep_id,
+	'country' : payload.country
+}]]]></db:input-parameters>
+		</db:insert>
+		<logger level="INFO" doc:name="Logger" doc:id="58e4910f-1710-4a41-89da-85a0cc68e7e5" message="#[%dw 2.0&#10;output application/json&#10;---&#10;payload]"/>
+	</flow>
+</mule>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="MULE_EE.4.10.1.munits-poc-suite" time="6.762" failures="0" errors="0" skipped="0" tests="6">
+  <properties>
+    <property key="java.specification.version" value="17"/>
+    <property key="sun.jnu.encoding" value="UTF-8"/>
+    <property key="java.class.path" value="/Users/rajat.kumar/Desktop/Mulesoft/Maven/apache-maven-3.9.6/boot/plexus-classworlds-2.7.0.jar"/>
+    <property key="java.vm.vendor" value="Eclipse Adoptium"/>
+    <property key="sun.arch.data.model" value="64"/>
+    <property key="java.vendor.url" value="https://adoptium.net/"/>
+    <property key="user.timezone" value="Asia/Kolkata"/>
+    <property key="maven.conf" value="/Users/rajat.kumar/Desktop/Mulesoft/Maven/apache-maven-3.9.6/conf"/>
+    <property key="java.vm.specification.version" value="17"/>
+    <property key="os.name" value="Mac OS X"/>
+    <property key="sun.java.launcher" value="SUN_STANDARD"/>
+    <property key="user.country" value="IN"/>
+    <property key="sun.boot.library.path" value="/Applications/AnypointStudio.app/Contents/Eclipse/plugins/org.mule.tooling.jdk.macosx.x86_64_1.4.1/Contents/Home/lib"/>
+    <property key="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -X clean install -U"/>
+    <property key="jdk.debug" value="release"/>
+    <property key="maven.home" value="/Users/rajat.kumar/Desktop/Mulesoft/Maven/apache-maven-3.9.6"/>
+    <property key="sun.cpu.endian" value="little"/>
+    <property key="user.home" value="/Users/rajat.kumar"/>
+    <property key="user.language" value="en"/>
+    <property key="sun.stderr.encoding" value="UTF-8"/>
+    <property key="java.specification.vendor" value="Oracle Corporation"/>
+    <property key="java.version.date" value="2024-07-16"/>
+    <property key="java.home" value="/Applications/AnypointStudio.app/Contents/Eclipse/plugins/org.mule.tooling.jdk.macosx.x86_64_1.4.1/Contents/Home"/>
+    <property key="file.separator" value="/"/>
+    <property key="java.vm.compressedOopsMode" value="Zero based"/>
+    <property key="line.separator" value="&#xa;"/>
+    <property key="sun.stdout.encoding" value="UTF-8"/>
+    <property key="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property key="java.specification.name" value="Java Platform API Specification"/>
+    <property key="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property key="java.runtime.version" value="17.0.12+7"/>
+    <property key="user.name" value="rajat.kumar"/>
+    <property key="path.separator" value=":"/>
+    <property key="os.version" value="26.2"/>
+    <property key="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property key="file.encoding" value="UTF-8"/>
+    <property key="guice.disable.misplaced.annotation.check" value="true"/>
+    <property key="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property key="java.vendor.version" value="Temurin-17.0.12+7"/>
+    <property key="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+    <property key="java.io.tmpdir" value="/var/folders/65/b3g5r1gj24x08y4tnk5dgs400000gn/T/"/>
+    <property key="java.version" value="17.0.12"/>
+    <property key="user.dir" value="/Users/rajat.kumar/AnypointStudio/studio-workspace/munits-poc"/>
+    <property key="os.arch" value="x86_64"/>
+    <property key="maven.multiModuleProjectDirectory" value="/Users/rajat.kumar/AnypointStudio/studio-workspace/munits-poc"/>
+    <property key="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property key="org.slf4j.simpleLogger.defaultLogLevel" value="debug"/>
+    <property key="native.encoding" value="UTF-8"/>
+    <property key="java.library.path" value="/Users/rajat.kumar/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property key="java.vm.info" value="mixed mode"/>
+    <property key="java.vendor" value="Eclipse Adoptium"/>
+    <property key="java.vm.version" value="17.0.12+7"/>
+    <property key="classworlds.conf" value="/Users/rajat.kumar/Desktop/Mulesoft/Maven/apache-maven-3.9.6/bin/m2.conf"/>
+    <property key="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property key="library.jansi.path" value="/Users/rajat.kumar/Desktop/Mulesoft/Maven/apache-maven-3.9.6/lib/jansi-native"/>
+    <property key="java.class.version" value="61.0"/>
+    <property key="mule.classloader.container.jpmsModuleLayer" value="false"/>
+    <property key="munit.system.properties.file" value="/Users/rajat.kumar/AnypointStudio/studio-workspace/munits-poc/target/user.system.properties"/>
+    <property key="org.glassfish.grizzly.DEFAULT_MEMORY_MANAGER" value="org.glassfish.grizzly.memory.HeapMemoryManager"/>
+  </properties>
+  <testcase time="4.408" name="receive-processed-order-details-test1" classname="MULE_EE.4.10.1.munits-poc-suite"/>
+  <testcase time="0.172" name="receive-processed-order-details-test" classname="MULE_EE.4.10.1.munits-poc-suite"/>
+  <testcase time="1.599" name="receive-processed-order-details-test-1" classname="MULE_EE.4.10.1.munits-poc-suite"/>
+  <testcase time="0.18" name="get-order-detailsFlow-test" classname="MULE_EE.4.10.1.munits-poc-suite"/>
+  <testcase time="0.283" name="insert-order-header-test" classname="MULE_EE.4.10.1.munits-poc-suite"/>
+  <testcase time="0.103" name="receive-processed-order-details-http-error-test" classname="MULE_EE.4.10.1.munits-poc-suite"/>
+</testsuite>

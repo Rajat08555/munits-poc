@@ -1,0 +1,10 @@
+SUCCESS - Test receive-processed-order-details-test1 finished Successfully.
+SUCCESS - Test receive-processed-order-details-test finished Successfully.
+SUCCESS - Test receive-processed-order-details-test-1 finished Successfully.
+SUCCESS - Test get-order-detailsFlow-test finished Successfully.
+SUCCESS - Test insert-order-header-test finished Successfully.
+SUCCESS - Test receive-processed-order-details-http-error-test finished Successfully.
+
+=============================================================================
+Tests run: 6 - Failures: 0 - Errors: 0 - Skipped: 0 - Time elapsed: 6.762 sec
+=============================================================================

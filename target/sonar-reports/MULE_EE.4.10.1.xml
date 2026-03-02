@@ -1,0 +1,13 @@
+<testExecutions version="1">
+  <file path="src/test/munit/munits-poc-suite.xml">
+    <testCase name="receive-processed-order-details-test1" duration="4408"/>
+    <testCase name="receive-processed-order-details-test" duration="172"/>
+    <testCase name="receive-processed-order-details-test-1" duration="1599"/>
+    <testCase name="get-order-detailsFlow-test" duration="180"/>
+    <testCase name="insert-order-header-test" duration="283"/>
+    <testCase name="receive-processed-order-details-http-error-test" duration="103"/>
+  </file>
+  <file path="src/test/munit/munits-poc-suite1.xml">
+    <testCase name="receive-processed-order-details-test2" duration="1377"/>
+  </file>
+</testExecutions>

@@ -1,0 +1,332 @@
+{
+  "version": "1.2.0",
+  "artifactCoordinates": {
+    "groupId": "com.mycompany",
+    "artifactId": "munits-poc",
+    "version": "1.0.0-SNAPSHOT",
+    "type": "jar",
+    "classifier": "mule-application"
+  },
+  "dependencies": [
+    {
+      "artifactCoordinates": {
+        "groupId": "org.mule.connectors",
+        "artifactId": "mule-http-connector",
+        "version": "1.9.3",
+        "type": "jar",
+        "classifier": "mule-plugin"
+      },
+      "uri": "file:/Users/rajat.kumar/.m2/repository/org/mule/connectors/mule-http-connector/1.9.3/mule-http-connector-1.9.3-mule-plugin.jar"
+    },
+    {
+      "artifactCoordinates": {
+        "groupId": "org.mule.connectors",
+        "artifactId": "mule-sockets-connector",
+        "version": "1.2.4",
+        "type": "jar",
+        "classifier": "mule-plugin"
+      },
+      "uri": "file:/Users/rajat.kumar/.m2/repository/org/mule/connectors/mule-sockets-connector/1.2.4/mule-sockets-connector-1.2.4-mule-plugin.jar"
+    },
+    {
+      "artifactCoordinates": {
+        "groupId": "com.mulesoft.connectors",
+        "artifactId": "anypoint-mq-connector",
+        "version": "4.0.4",
+        "type": "jar",
+        "classifier": "mule-plugin"
+      },
+      "uri": "file:/Users/rajat.kumar/.m2/repository/com/mulesoft/connectors/anypoint-mq-connector/4.0.4/anypoint-mq-connector-4.0.4-mule-plugin.jar"
+    },
+    {
+      "artifactCoordinates": {
+        "groupId": "org.mule.connectors",
+        "artifactId": "mule-vm-connector",
+        "version": "2.0.1",
+        "type": "jar",
+        "classifier": "mule-plugin"
+      },
+      "uri": "file:/Users/rajat.kumar/.m2/repository/org/mule/connectors/mule-vm-connector/2.0.1/mule-vm-connector-2.0.1-mule-plugin.jar"
+    },
+    {
+      "artifactCoordinates": {
+        "groupId": "org.mule.connectors",
+        "artifactId": "mule-db-connector",
+        "version": "1.14.10",
+        "type": "jar",
+        "classifier": "mule-plugin"
+      },
+      "uri": "file:/Users/rajat.kumar/.m2/repository/org/mule/connectors/mule-db-connector/1.14.10/mule-db-connector-1.14.10-mule-plugin.jar"
+    },
+    {
+      "artifactCoordinates": {
+        "groupId": "com.mulesoft.munit",
+        "artifactId": "munit-runner",
+        "version": "3.2.1",
+        "type": "jar",
+        "classifier": "mule-plugin"
+      },
+      "uri": "file:/Users/rajat.kumar/.m2/repository/com/mulesoft/munit/munit-runner/3.2.1/munit-runner-3.2.1-mule-plugin.jar"
+    },
+    {
+      "artifactCoordinates": {
+        "groupId": "com.mulesoft.munit",
+        "artifactId": "munit-tools",
+        "version": "3.2.1",
+        "type": "jar",
+        "classifier": "mule-plugin"
+      },
+      "uri": "file:/Users/rajat.kumar/.m2/repository/com/mulesoft/munit/munit-tools/3.2.1/munit-tools-3.2.1-mule-plugin.jar"
+    },
+    {
+      "artifactCoordinates": {
+        "groupId": "org.mule.weave",
+        "artifactId": "assertions",
+        "version": "1.2.1",
+        "type": "jar"
+      },
+      "uri": "file:/Users/rajat.kumar/.m2/repository/org/mule/weave/assertions/1.2.1/assertions-1.2.1.jar",
+      "resources": [
+        "META-INF/MANIFEST.MF",
+        "META-INF/maven/org.mule.weave/assertions/pom-default.xml",
+        "META-INF/maven/org.mule.weave/assertions/pom.properties",
+        "META-INF/native-image/org.mule.weave/assertions/resource-config.json",
+        "dw/test/Asserts.dwl",
+        "dw/test/internal/Utils.dwl"
+      ]
+    },
+    {
+      "artifactCoordinates": {
+        "groupId": "org.mule.weave",
+        "artifactId": "wlang",
+        "version": "2.5.0-20221129",
+        "type": "jar"
+      },
+      "uri": "file:/Users/rajat.kumar/.m2/repository/org/mule/weave/wlang/2.5.0-20221129/wlang-2.5.0-20221129.jar",
+      "resources": [
+        "META-INF/MANIFEST.MF",
+        "META-INF/maven/org.mule.weave/wlang/pom-default.xml",
+        "META-INF/maven/org.mule.weave/wlang/pom.properties",
+        "META-INF/native-image/org.mule.weave/wlang/resource-config.json",
+        "dw/Core.dwl",
+        "dw/Crypto.dwl",
+        "dw/Runtime.dwl",
+        "dw/System.dwl",
+        "dw/core/Arrays.dwl",
+        "dw/core/Binaries.dwl",
+        "dw/core/Dates.dwl",
+        "dw/core/Numbers.dwl",
+        "dw/core/Objects.dwl",
+        "dw/core/Periods.dwl",
+        "dw/core/Strings.dwl",
+        "dw/core/Types.dwl",
+        "dw/core/URL.dwl",
+        "dw/extension/DataFormat.dwl",
+        "dw/module/Multipart.dwl",
+        "dw/util/Coercions.dwl",
+        "dw/util/Diff.dwl",
+        "dw/util/Math.dwl",
+        "dw/util/Timer.dwl",
+        "dw/util/Tree.dwl",
+        "dw/util/Values.dwl"
+      ]
+    },
+    {
+      "artifactCoordinates": {
+        "groupId": "org.scala-lang",
+        "artifactId": "scala-library",
+        "version": "2.12.10",
+        "type": "jar"
+      },
+      "uri": "file:/Users/rajat.kumar/.m2/repository/org/scala-lang/scala-library/2.12.10/scala-library-2.12.10.jar",
+      "packages": [
+        "scala",
+        "scala.annotation",
+        "scala.annotation.meta",
+        "scala.annotation.unchecked",
+        "scala.beans",
+        "scala.collection",
+        "scala.collection.concurrent",
+        "scala.collection.convert",
+        "scala.collection.generic",
+        "scala.collection.immutable",
+        "scala.collection.mutable",
+        "scala.collection.parallel",
+        "scala.collection.parallel.immutable",
+        "scala.collection.parallel.mutable",
+        "scala.collection.script",
+        "scala.compat",
+        "scala.concurrent",
+        "scala.concurrent.duration",
+        "scala.concurrent.forkjoin",
+        "scala.concurrent.impl",
+        "scala.io",
+        "scala.math",
+        "scala.ref",
+        "scala.reflect",
+        "scala.reflect.macros.internal",
+        "scala.runtime",
+        "scala.runtime.java8",
+        "scala.sys",
+        "scala.sys.process",
+        "scala.text",
+        "scala.util",
+        "scala.util.control",
+        "scala.util.hashing",
+        "scala.util.matching"
+      ],
+      "resources": [
+        "LICENSE",
+        "META-INF/MANIFEST.MF",
+        "NOTICE",
+        "library.properties",
+        "rootdoc.txt"
+      ]
+    },
+    {
+      "artifactCoordinates": {
+        "groupId": "org.mule.connectors",
+        "artifactId": "mule-file-connector",
+        "version": "1.5.3",
+        "type": "jar",
+        "classifier": "mule-plugin"
+      },
+      "uri": "file:/Users/rajat.kumar/.m2/repository/org/mule/connectors/mule-file-connector/1.5.3/mule-file-connector-1.5.3-mule-plugin.jar"
+    },
+    {
+      "artifactCoordinates": {
+        "groupId": "org.mule.modules",
+        "artifactId": "mule-module-file-extension-common",
+        "version": "1.4.3",
+        "type": "jar",
+        "classifier": "mule-plugin"
+      },
+      "uri": "file:/Users/rajat.kumar/.m2/repository/org/mule/modules/mule-module-file-extension-common/1.4.3/mule-module-file-extension-common-1.4.3-mule-plugin.jar"
+    },
+    {
+      "artifactCoordinates": {
+        "groupId": "com.mulesoft.connectors",
+        "artifactId": "mule-salesforce-connector",
+        "version": "11.3.1",
+        "type": "jar",
+        "classifier": "mule-plugin"
+      },
+      "uri": "file:/Users/rajat.kumar/.m2/repository/com/mulesoft/connectors/mule-salesforce-connector/11.3.1/mule-salesforce-connector-11.3.1-mule-plugin.jar"
+    },
+    {
+      "artifactCoordinates": {
+        "groupId": "org.mule.connectors",
+        "artifactId": "mule-objectstore-connector",
+        "version": "1.2.2",
+        "type": "jar",
+        "classifier": "mule-plugin"
+      },
+      "uri": "file:/Users/rajat.kumar/.m2/repository/org/mule/connectors/mule-objectstore-connector/1.2.2/mule-objectstore-connector-1.2.2-mule-plugin.jar"
+    },
+    {
+      "artifactCoordinates": {
+        "groupId": "org.postgresql",
+        "artifactId": "postgresql",
+        "version": "42.7.4",
+        "type": "jar"
+      },
+      "uri": "file:/Users/rajat.kumar/.m2/repository/org/postgresql/postgresql/42.7.4/postgresql-42.7.4.jar",
+      "isShared": true,
+      "packages": [
+        "org.postgresql",
+        "org.postgresql.copy",
+        "org.postgresql.core",
+        "org.postgresql.core.v3",
+        "org.postgresql.core.v3.adaptivefetch",
+        "org.postgresql.core.v3.replication",
+        "org.postgresql.ds",
+        "org.postgresql.ds.common",
+        "org.postgresql.fastpath",
+        "org.postgresql.geometric",
+        "org.postgresql.gss",
+        "org.postgresql.hostchooser",
+        "org.postgresql.jdbc",
+        "org.postgresql.jdbc2",
+        "org.postgresql.jdbc2.optional",
+        "org.postgresql.jdbc3",
+        "org.postgresql.jdbcurlresolver",
+        "org.postgresql.largeobject",
+        "org.postgresql.osgi",
+        "org.postgresql.plugin",
+        "org.postgresql.replication",
+        "org.postgresql.replication.fluent",
+        "org.postgresql.replication.fluent.logical",
+        "org.postgresql.replication.fluent.physical",
+        "org.postgresql.shaded.com.ongres.saslprep",
+        "org.postgresql.shaded.com.ongres.scram.client",
+        "org.postgresql.shaded.com.ongres.scram.common",
+        "org.postgresql.shaded.com.ongres.scram.common.exception",
+        "org.postgresql.shaded.com.ongres.scram.common.util",
+        "org.postgresql.shaded.com.ongres.stringprep",
+        "org.postgresql.ssl",
+        "org.postgresql.ssl.jdbc4",
+        "org.postgresql.sspi",
+        "org.postgresql.translation",
+        "org.postgresql.util",
+        "org.postgresql.util.internal",
+        "org.postgresql.xa",
+        "org.postgresql.xml"
+      ],
+      "resources": [
+        "META-INF/LICENSE",
+        "META-INF/MANIFEST.MF",
+        "META-INF/licenses/com.ongres.scram/scram-client-3.1/META-INF/LICENSE",
+        "META-INF/licenses/com.ongres.scram/scram-common-3.1/META-INF/LICENSE",
+        "META-INF/licenses/com.ongres.stringprep/saslprep-2.2/META-INF/LICENSE",
+        "META-INF/licenses/com.ongres.stringprep/stringprep-2.2/META-INF/LICENSE",
+        "META-INF/services/java.sql.Driver"
+      ]
+    },
+    {
+      "artifactCoordinates": {
+        "groupId": "org.checkerframework",
+        "artifactId": "checker-qual",
+        "version": "3.42.0",
+        "type": "jar"
+      },
+      "uri": "file:/Users/rajat.kumar/.m2/repository/org/checkerframework/checker-qual/3.42.0/checker-qual-3.42.0.jar",
+      "isShared": true,
+      "packages": [
+        "org.checkerframework.checker.builder.qual",
+        "org.checkerframework.checker.calledmethods.qual",
+        "org.checkerframework.checker.compilermsgs.qual",
+        "org.checkerframework.checker.fenum.qual",
+        "org.checkerframework.checker.formatter.qual",
+        "org.checkerframework.checker.guieffect.qual",
+        "org.checkerframework.checker.i18n.qual",
+        "org.checkerframework.checker.i18nformatter.qual",
+        "org.checkerframework.checker.index.qual",
+        "org.checkerframework.checker.initialization.qual",
+        "org.checkerframework.checker.interning.qual",
+        "org.checkerframework.checker.lock.qual",
+        "org.checkerframework.checker.mustcall.qual",
+        "org.checkerframework.checker.nullness.qual",
+        "org.checkerframework.checker.optional.qual",
+        "org.checkerframework.checker.propkey.qual",
+        "org.checkerframework.checker.regex.qual",
+        "org.checkerframework.checker.signature.qual",
+        "org.checkerframework.checker.signedness.qual",
+        "org.checkerframework.checker.tainting.qual",
+        "org.checkerframework.checker.units.qual",
+        "org.checkerframework.common.aliasing.qual",
+        "org.checkerframework.common.initializedfields.qual",
+        "org.checkerframework.common.reflection.qual",
+        "org.checkerframework.common.returnsreceiver.qual",
+        "org.checkerframework.common.subtyping.qual",
+        "org.checkerframework.common.util.count.report.qual",
+        "org.checkerframework.common.value.qual",
+        "org.checkerframework.dataflow.qual",
+        "org.checkerframework.framework.qual"
+      ],
+      "resources": [
+        "META-INF/LICENSE.txt",
+        "META-INF/MANIFEST.MF"
+      ]
+    }
+  ]
+}

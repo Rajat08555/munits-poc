@@ -1,0 +1,15 @@
+{
+  "runCoverage": true,
+  "failBuild": true,
+  "requiredApplicationCoverage": 75.0,
+  "requiredResourceCoverage": 40.0,
+  "requiredFlowCoverage": 40.0,
+  "ignoreFlows": [],
+  "ignoreFiles": [],
+  "formats": [
+    "console",
+    "sonar",
+    "json",
+    "html"
+  ]
+}

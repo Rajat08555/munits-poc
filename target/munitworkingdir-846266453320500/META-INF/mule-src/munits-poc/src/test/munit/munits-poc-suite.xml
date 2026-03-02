@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="munits-poc-suite.xml" />
+	<munit:test name="get-order-detailsFlow-test" doc:id="269252dd-ff23-450a-b912-cf26df899ffb" >
+		<munit:behavior >
+			<munit:set-event doc:name="Set Input" doc:id="fb7aea8c-66e6-4f31-8b0e-688daf66deca" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://getorderdetailsFlowtest/set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://getorderdetailsFlowtest/set-event_attributes.dwl')]" />
+			</munit:set-event>
+			<munit-tools:mock-when doc:name="Mock MQ Publish" doc:id="52d97103-c729-4bba-bd4b-1cd62e12aaca" processor="anypoint-mq:publish">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="Publish" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="01ceb332-6119-4553-91d7-0fe787be620f" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="Anypoint_MQ_Config" attributeName="config-ref" />
+					<munit-tools:with-attribute whereValue="order" attributeName="destination" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value='#[{&#10;  "order_id": "1001",&#10;  "total_invoice_amount": "200.10",&#10;  "order_lines": "5",&#10;  "customer_id": "1",&#10;  "expected_ship_date": "20221229",&#10;  "expected_delivery_date": "20221231",&#10;  "status": "BackOrdered",&#10;  "comments": "OutOfStock",&#10;  "salesrep_id": "100",&#10;  "country": "Singapore",&#10;  "lines": [&#10;    {&#10;      "order_line_id": "1",&#10;      "line_number": "1",&#10;      "item_id": "100",&#10;      "ordered_qty": "10",&#10;      "line_amount": "100.00",&#10;      "status": "Booked",&#10;      "comments": "InStock"&#10;    },&#10;    {&#10;      "order_line_id": "2",&#10;      "line_number": "2",&#10;      "item_id": "200",&#10;      "ordered_qty": "10",&#10;      "line_amount": "200.00",&#10;      "status": "BackOrdered",&#10;      "comments": "OutOfStock"&#10;    },&#10;    {&#10;      "order_line_id": "3",&#10;      "line_number": "3",&#10;      "item_id": "300",&#10;      "ordered_qty": "10",&#10;      "line_amount": "300.00",&#10;      "status": "Booked",&#10;      "comments": "InStock"&#10;    }&#10;  ]&#10;}]' mediaType="application/json" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get-order-detailsFlow" doc:id="bcef6230-5720-4070-9183-10b11e955450" name="get-order-detailsFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="3b458b4a-3d80-4d70-807f-35cb08bb2100" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import getorderdetailsFlowtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="receive-processed-order-details-test" doc:id="6cbae542-83fd-4a86-b769-beb7bc2ac282" >
+		<munit:behavior >
+			<munit:set-event doc:name="Set Input" doc:id="07643471-dc03-4ca0-bd92-4fbc81af7800" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://getorderdetailsFlowtest/set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://getorderdetailsFlowtest/set-event_attributes.dwl')]" />
+			</munit:set-event>
+			<munit-tools:mock-when doc:name="Mock MQ Publish" doc:id="c4e243c2-ab96-4c3c-a615-11dbd2b667d6" processor="anypoint-mq:publish">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="Publish" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="39010066-2bfa-4055-bdea-0be94b60f396" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="Anypoint_MQ_Config" attributeName="config-ref" />
+					<munit-tools:with-attribute whereValue="order-response" attributeName="destination" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value='#[%dw 2.0&#10;output application/json&#10;---&#10;{&#10;	"message": "Order Number: 9999 successfully processed"&#10;}]' />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="Mock DB Bulk Insert" doc:id="cba26e0d-ca99-4164-9570-7c8d27d6e145" processor="db:bulk-insert">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="Bulk insert" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="9fe2efdb-ba23-439e-859b-4948959f4b70" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="Database_Config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[[&#10;  1,&#10;  1,&#10;  1&#10;]]" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="Mock Fetch Exchange Rates" doc:id="03bcb5cc-8384-4e58-b130-592755fbde00" processor="http:request">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="GET" attributeName="method" />
+					<munit-tools:with-attribute whereValue="Fetch Exchange Rates" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="2ca0b905-7df5-480d-922b-bcf8d4a593a9" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://receiveProcessedOrder/getExchangeRates.dwl')]" mediaType="application/json" encoding="UTF-8" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="Mock Flow-Ref" doc:id="51cccb73-9cd9-4c9b-9485-e51e744b7246" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="Flow Reference Insert Order Header" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="85b6c568-0073-4030-94a6-f75f140e1384" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="insert-order-header" attributeName="name" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://receiveProcessedOrder/insert-ord-hdr.dwl')]" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get-order-detailsFlow" doc:id="72d926c7-d9b4-4b03-9000-31eda25b1a1c" name="receive-processed-order-details" />
+		</munit:execution>
+	</munit:test>
+	<munit:test name="insert-order-header-test" doc:id="eed8b64d-c566-493f-82c8-f203fdc4d6ee" >
+		<munit:behavior >
+			<munit:set-event doc:name="Set Input" doc:id="5aa02db1-046b-4505-ad19-5e28e0f92a34" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://getorderdetailsFlowtest/set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://getorderdetailsFlowtest/set-event_attributes.dwl')]" />
+			</munit:set-event>
+			<munit-tools:mock-when doc:name="Mock DB Insert" doc:id="56b1a474-d415-489b-aa44-6e7f690366ba" processor="db:insert" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="Insert" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="2e52a6b5-16f7-4185-9e26-deb5955e1eee" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="Database_Config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://receiveProcessedOrder/insert-ord-hdr.dwl')]" mediaType="application/json" encoding="UTF-8" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get-order-detailsFlow" doc:id="323e3a97-d0d9-44bc-8af1-893df2c5b354" name="insert-order-header" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="d1161fde-e28d-475b-8147-30b1a7641ab3" actual="#[payload.affectedRows]" expected="#[1]" message="Successful Record Insertion"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="receive-processed-order-details-http-error-test" doc:id="ad52c4ed-bbfb-4eff-99b4-0c242ffba39b" >
+		<munit:behavior >
+			<munit:set-event doc:name="Set Input" doc:id="1250737d-7255-41a5-a224-7594baf88659" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://getorderdetailsFlowtest/set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://getorderdetailsFlowtest/set-event_attributes.dwl')]" />
+			</munit:set-event>
+			<munit-tools:mock-when doc:name="Mock MQ Publish" doc:id="49ad3ed7-41f1-4344-937b-bce81d4002dc" processor="anypoint-mq:publish" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="Publish" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="39010066-2bfa-4055-bdea-0be94b60f396" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="Anypoint_MQ_Config" attributeName="config-ref" />
+					<munit-tools:with-attribute whereValue="order-response" attributeName="destination" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value='#[%dw 2.0&#10;output application/json&#10;---&#10;{&#10;	"message": "Order Number: 9999 successfully processed"&#10;}]' />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="Mock DB Bulk Insert" doc:id="142d22ad-fa10-4d57-ae8d-c560e1ff3548" processor="db:bulk-insert" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="Bulk insert" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="9fe2efdb-ba23-439e-859b-4948959f4b70" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="Database_Config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[[&#10;  1,&#10;  1,&#10;  1&#10;]]" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="Mock HTTP Error" doc:id="79abf031-521b-49f9-9105-e6de3d18bedc" processor="http:request">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="GET" attributeName="method" />
+					<munit-tools:with-attribute whereValue="Fetch Exchange Rates" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="2ca0b905-7df5-480d-922b-bcf8d4a593a9" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="HTTP_Request_configuration" attributeName="config-ref" />
+					<munit-tools:with-attribute whereValue="/latest" attributeName="path" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="HTTP:CONNECTIVITY" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="Mock Flow Ref" doc:id="569d7ed3-d434-4595-9532-be6f7ee05ad5" processor="flow-ref" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="Flow Reference Insert Order Header" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="85b6c568-0073-4030-94a6-f75f140e1384" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="insert-order-header" attributeName="name" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://receiveProcessedOrder/insert-ord-hdr.dwl')]" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get-order-detailsFlow" doc:id="948e1d74-dc25-4fe7-ae4a-c5848df93487" name="receive-processed-order-details" />
+		</munit:execution>
+	</munit:test>
+	<munit:test name="receive-processed-order-details-test1" doc:id="e98f4955-b528-4864-9750-aed48dea7f6e" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Set Order Var" doc:id="82ffc058-9393-4c48-a0d7-e6c3db930cf9" processor="set-variable">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="fd8b0271-d27b-4b17-a004-38f87079ed93" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:variables >
+						<munit-tools:variable key="orderVar" value="#[output application/json --- readUrl('classpath://receiveprocessedorderdetailstest1/mock_variable_.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="Mock Fetch Exchange Rates" doc:id="ac434848-9bec-4401-ad3b-3853920963e2" processor="http:request">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="2ca0b905-7df5-480d-922b-bcf8d4a593a9" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://receiveprocessedorderdetailstest1/mock_payload.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://receiveprocessedorderdetailstest1/mock_attributes.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="orderVar" value="#[output application/json --- readUrl('classpath://receiveprocessedorderdetailstest1/mock_variable_1.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="9752c949-2444-40d1-91f6-9d2a21e12041" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://receiveprocessedorderdetailstest1/set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://receiveprocessedorderdetailstest1/set-event_attributes.dwl')]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to receive-processed-order-details" doc:id="9dc74c29-5ee0-4a07-a29e-485837f7d05e" name="receive-processed-order-details"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="3a1fdea7-e384-4760-ba32-dc1379e89c06" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import receiveprocessedorderdetailstest1::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+			<munit-tools:verify-call doc:name="Verify Logger" doc:id="097b5495-5ca4-4690-8e6b-5e513c5c1deb" processor="logger" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="d10f5ca7-1d9e-4b48-814c-eb49e12ea8de" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:verify-call doc:name="Verify Logger" doc:id="9ffdec75-6433-4ac8-9154-4bbf90b581d0" processor="logger" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="22b3784a-244b-46a1-8217-52098e8d6b41" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:verify-call doc:name="Verify Publish" doc:id="efa68ac0-b612-42d4-b466-057e020c7c3b" processor="anypoint-mq:publish" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="39010066-2bfa-4055-bdea-0be94b60f396" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="receive-processed-order-details-test-1" doc:id="295ae1a8-8ffa-406f-a9e7-e81f3f4862a1" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Fetch Exchange Rates" doc:id="809a9156-7358-4696-ae37-dd72cf578698" processor="http:request">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="2ca0b905-7df5-480d-922b-bcf8d4a593a9" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://receiveprocessedorderdetailstest1/mock_payload1.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://receiveprocessedorderdetailstest1/mock_attributes1.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="orderVar" value="#[output application/json --- readUrl('classpath://receiveprocessedorderdetailstest1/mock_variable_2.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="77f1c668-09a3-493d-83f5-6f4400bbee5a" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://receiveprocessedorderdetailstest1/set-event_payload1.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://receiveprocessedorderdetailstest1/set-event_attributes1.dwl')]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to receive-processed-order-details" doc:id="59e3a5c7-8ce8-4afc-860a-eef38a4640f8" name="receive-processed-order-details"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="658838c9-0561-4c76-a37e-4feedc515756" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import receiveprocessedorderdetailstest1::assert_expression_payload1
+---
+assert_expression_payload1::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+			<munit-tools:verify-call doc:name="Verify Publish" doc:id="c2d4fc29-5ebe-4cc1-8a4b-28ff2fab1210" processor="anypoint-mq:publish" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="39010066-2bfa-4055-bdea-0be94b60f396" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+
+</mule>

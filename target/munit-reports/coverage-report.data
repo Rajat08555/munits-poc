@@ -1,0 +1,202 @@
+{
+  "resources": [
+    {
+      "name": "munits-poc.xml",
+      "weight": 100.0,
+      "flows": [
+        {
+          "name": "insert-order-header",
+          "type": "FLOW",
+          "locations": [
+            {
+              "path": "insert-order-header/processors/1",
+              "lineNumber": 125
+            },
+            {
+              "path": "insert-order-header/processors/0",
+              "lineNumber": 124
+            },
+            {
+              "path": "insert-order-header/processors/2",
+              "lineNumber": 137
+            }
+          ],
+          "coveredLocations": [
+            {
+              "path": "insert-order-header/processors/1",
+              "lineNumber": 125
+            },
+            {
+              "path": "insert-order-header/processors/0",
+              "lineNumber": 124
+            },
+            {
+              "path": "insert-order-header/processors/2",
+              "lineNumber": 137
+            }
+          ]
+        },
+        {
+          "name": "get-order-detailsFlow",
+          "type": "FLOW",
+          "locations": [
+            {
+              "path": "get-order-detailsFlow/processors/0",
+              "lineNumber": 28
+            },
+            {
+              "path": "get-order-detailsFlow/processors/1/errorHandler/0/processors/1",
+              "lineNumber": 55
+            },
+            {
+              "path": "get-order-detailsFlow/processors/1/processors/0/route/0/processors/2",
+              "lineNumber": 34
+            },
+            {
+              "path": "get-order-detailsFlow/errorHandler/0/processors/1",
+              "lineNumber": 62
+            },
+            {
+              "path": "get-order-detailsFlow/processors/1/errorHandler/0/processors/0",
+              "lineNumber": 54
+            },
+            {
+              "path": "get-order-detailsFlow/processors/1/processors/0/route/1/processors/1",
+              "lineNumber": 49
+            },
+            {
+              "path": "get-order-detailsFlow/errorHandler/0/processors/0",
+              "lineNumber": 61
+            },
+            {
+              "path": "get-order-detailsFlow/processors/1/processors/0/route/0/processors/0",
+              "lineNumber": 32
+            },
+            {
+              "path": "get-order-detailsFlow/processors/1/processors/0/route/0/processors/3",
+              "lineNumber": 35
+            },
+            {
+              "path": "get-order-detailsFlow/processors/1/processors/0/route/1/processors/0",
+              "lineNumber": 48
+            },
+            {
+              "path": "get-order-detailsFlow/processors/1/processors/0/route/0/processors/1",
+              "lineNumber": 33
+            }
+          ],
+          "coveredLocations": [
+            {
+              "path": "get-order-detailsFlow/processors/0",
+              "lineNumber": 28
+            },
+            {
+              "path": "get-order-detailsFlow/processors/1/processors/0/route/0/processors/2",
+              "lineNumber": 34
+            },
+            {
+              "path": "get-order-detailsFlow/processors/1/processors/0/route/0/processors/0",
+              "lineNumber": 32
+            },
+            {
+              "path": "get-order-detailsFlow/processors/1/processors/0/route/0/processors/3",
+              "lineNumber": 35
+            },
+            {
+              "path": "get-order-detailsFlow/processors/1/processors/0/route/0/processors/1",
+              "lineNumber": 33
+            }
+          ]
+        },
+        {
+          "name": "receive-processed-order-details",
+          "type": "FLOW",
+          "locations": [
+            {
+              "path": "receive-processed-order-details/processors/5",
+              "lineNumber": 100
+            },
+            {
+              "path": "receive-processed-order-details/processors/6",
+              "lineNumber": 101
+            },
+            {
+              "path": "receive-processed-order-details/processors/8",
+              "lineNumber": 109
+            },
+            {
+              "path": "receive-processed-order-details/errorHandler/0/processors/0",
+              "lineNumber": 119
+            },
+            {
+              "path": "receive-processed-order-details/processors/2",
+              "lineNumber": 80
+            },
+            {
+              "path": "receive-processed-order-details/processors/4",
+              "lineNumber": 96
+            },
+            {
+              "path": "receive-processed-order-details/processors/7",
+              "lineNumber": 108
+            },
+            {
+              "path": "receive-processed-order-details/processors/3",
+              "lineNumber": 81
+            },
+            {
+              "path": "receive-processed-order-details/processors/1",
+              "lineNumber": 79
+            },
+            {
+              "path": "receive-processed-order-details/processors/0",
+              "lineNumber": 78
+            }
+          ],
+          "coveredLocations": [
+            {
+              "path": "receive-processed-order-details/processors/5",
+              "lineNumber": 100
+            },
+            {
+              "path": "receive-processed-order-details/processors/6",
+              "lineNumber": 101
+            },
+            {
+              "path": "receive-processed-order-details/processors/8",
+              "lineNumber": 109
+            },
+            {
+              "path": "receive-processed-order-details/errorHandler/0/processors/0",
+              "lineNumber": 119
+            },
+            {
+              "path": "receive-processed-order-details/processors/2",
+              "lineNumber": 80
+            },
+            {
+              "path": "receive-processed-order-details/processors/4",
+              "lineNumber": 96
+            },
+            {
+              "path": "receive-processed-order-details/processors/7",
+              "lineNumber": 108
+            },
+            {
+              "path": "receive-processed-order-details/processors/3",
+              "lineNumber": 81
+            },
+            {
+              "path": "receive-processed-order-details/processors/1",
+              "lineNumber": 79
+            },
+            {
+              "path": "receive-processed-order-details/processors/0",
+              "lineNumber": 78
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

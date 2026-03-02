@@ -1,0 +1,143 @@
+{
+  "coverage": 75.0,
+  "requiredApplicationCoverage": 75.0,
+  "requiredResourceCoverage": 40.0,
+  "requiredFlowCoverage": 40.0,
+  "flowCount": 3,
+  "processorCount": 24,
+  "coveredProcessorCount": 18,
+  "files": [
+    {
+      "name": "munits-poc.xml",
+      "flowCount": 3,
+      "coverage": 75.0,
+      "processorCount": 24,
+      "weight": 100.0,
+      "flows": [
+        {
+          "name": "insert-order-header",
+          "type": "FLOW",
+          "coverage": 100.0,
+          "messageProcessorCount": 3,
+          "coveredProcessorCount": 3,
+          "lines": [
+            {
+              "lineNumber": 125,
+              "covered": true
+            },
+            {
+              "lineNumber": 124,
+              "covered": true
+            },
+            {
+              "lineNumber": 137,
+              "covered": true
+            }
+          ]
+        },
+        {
+          "name": "get-order-detailsFlow",
+          "type": "FLOW",
+          "coverage": 45.45454545454545,
+          "messageProcessorCount": 11,
+          "coveredProcessorCount": 5,
+          "lines": [
+            {
+              "lineNumber": 28,
+              "covered": true
+            },
+            {
+              "lineNumber": 55,
+              "covered": false
+            },
+            {
+              "lineNumber": 34,
+              "covered": true
+            },
+            {
+              "lineNumber": 62,
+              "covered": false
+            },
+            {
+              "lineNumber": 54,
+              "covered": false
+            },
+            {
+              "lineNumber": 49,
+              "covered": false
+            },
+            {
+              "lineNumber": 61,
+              "covered": false
+            },
+            {
+              "lineNumber": 32,
+              "covered": true
+            },
+            {
+              "lineNumber": 35,
+              "covered": true
+            },
+            {
+              "lineNumber": 48,
+              "covered": false
+            },
+            {
+              "lineNumber": 33,
+              "covered": true
+            }
+          ]
+        },
+        {
+          "name": "receive-processed-order-details",
+          "type": "FLOW",
+          "coverage": 100.0,
+          "messageProcessorCount": 10,
+          "coveredProcessorCount": 10,
+          "lines": [
+            {
+              "lineNumber": 100,
+              "covered": true
+            },
+            {
+              "lineNumber": 101,
+              "covered": true
+            },
+            {
+              "lineNumber": 109,
+              "covered": true
+            },
+            {
+              "lineNumber": 119,
+              "covered": true
+            },
+            {
+              "lineNumber": 80,
+              "covered": true
+            },
+            {
+              "lineNumber": 96,
+              "covered": true
+            },
+            {
+              "lineNumber": 108,
+              "covered": true
+            },
+            {
+              "lineNumber": 81,
+              "covered": true
+            },
+            {
+              "lineNumber": 79,
+              "covered": true
+            },
+            {
+              "lineNumber": 78,
+              "covered": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

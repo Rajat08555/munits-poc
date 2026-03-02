@@ -1,0 +1,73 @@
+{
+  "runToken": "0329ac03-09dd-46d2-8558-f4a590e61237",
+  "projectName": "munits-poc",
+  "domainLocation": "",
+  "tags": [],
+  "testNames": [],
+  "testNamesWithSuite": [],
+  "suitePaths": [
+    "munits-poc-suite.xml",
+    "munits-poc-suite1.xml"
+  ],
+  "allSuitePaths": [
+    "munits-poc-suite.xml",
+    "munits-poc-suite1.xml"
+  ],
+  "skipAfterFailure": false,
+  "mmvs": [],
+  "notifierConfigurations": [
+    {
+      "clazz": "org.mule.munit.remote.notifiers.ConsoleNotifier",
+      "parameters": [
+        {
+          "name": "runToken",
+          "type": "java.lang.String",
+          "value": "0329ac03-09dd-46d2-8558-f4a590e61237"
+        }
+      ]
+    }
+  ],
+  "coverageConfiguration": {
+    "runCoverage": true,
+    "randomizeCoveragePort": true,
+    "suitePaths": [
+      "munits-poc-suite.xml",
+      "munits-poc-suite1.xml"
+    ],
+    "ignoredFiles": [],
+    "ignoredFlowNames": []
+  },
+  "containerConfiguration": {
+    "value": {
+      "mavenConfiguration": {
+        "settingsXmlFilePath": "/Users/rajat.kumar/.m2/settings.xml",
+        "globalSettingsXmlFilePath": "/Users/rajat.kumar/Desktop/Mulesoft/Maven/apache-maven-3.9.6/conf/settings.xml",
+        "mavenRepositoryDirectoryPath": "/Users/rajat.kumar/.m2/repository",
+        "activeProfiles": [],
+        "offlineMode": false,
+        "forcePolicyUpdate": true,
+        "ignoreArtifactDescriptorRepositories": false,
+        "remoteRepositories": [
+          {
+            "id": "mule",
+            "url": "https://repository.mulesoft.org/nexus/content/repositories/public/"
+          }
+        ]
+      },
+      "serverPluginConfigurations": [
+        {
+          "groupId": "com.mulesoft.munit.plugins",
+          "artifactId": "munit-coverage-plugin",
+          "version": "3.6.0",
+          "type": "jar",
+          "classifier": "mule-server-plugin"
+        }
+      ],
+      "runtimeId": "4.10.1",
+      "product": "MULE_EE",
+      "munitWorkingDirectoryPath": "/Users/rajat.kumar/AnypointStudio/studio-workspace/munits-poc/target/munitworkingdir-846266453320500",
+      "log4JConfigurationFilePath": "/Users/rajat.kumar/AnypointStudio/studio-workspace/munits-poc/target/test-classes/log4j2-test.xml"
+    }
+  },
+  "clearParameters": false
+}
